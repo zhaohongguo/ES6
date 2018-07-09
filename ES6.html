@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		代码块：{}包起来的代码，形成一个作用域，块级作用域
+
+		用let定义的变量，只能在代码块里使用
+		var 只有函数作用域
+
+		a) let具备块级作用域
+		b) 不允许重复声明
+			let a =12;
+			let a = 3; //错的
+		用处：
+			封闭空间：
+			(function(){
+				//code
+			})()
+			现在：
+			{
+				let a = 12;
+			}
+		块级作用域，其实就是匿名函数立即调用
+-------------------------------------------------------------------
+		const---用来定义常量
+			一旦被赋值，以后再也修改不了
+			const a = 12;
+			a=13; //报错
+			注意：const必须给初始值，不能重复声明
+			因为以后再也没法赋值，所以声明的时候一定得有值
+
+			用途：为了防止意外修改变量
+				比如引入库名，组件名
+-------------------------------------------------------------------		
+		字符串连接	
+			之前：
+				var str='';
+				var str="";
+			现在：
+				反单引号  var str=``  字符串模板
+			之前：
+				'asd'+变量+'asd'
+			现在：
+				`asd$(变量名)asd`
+-------------------------------------------------------------------
+		解构赋值
+			var [a,b,c]=[12,22,11];
+
+
+			var {a,b,c}={b:22,a:12,c:11}; 		跟顺序无关
+			模式匹配
+				var [a,[b,c],d]=[12,[1,2],5];  左侧的样子需要和右侧一样
+			交互----数据解析
+			解构赋值还可以给默认值：
+				语法：
+					var {time=12,id=1}={};
+-------------------------------------------------------------------
+		复制数组
+			1.循环
+			 	var arr=[1,2,3];
+			 	var arr2=[];
+			 	for (var i = 0; i < arr.length; i++) {
+			 		arr[i]=arr[i];
+			 	}
+			 	console.log(arr.arr2); //{1,2,3} {1,2,3}
+			 2.Array.from
+				 var arr=[1,2,3];
+				 var arr2=Array.from(arr);
+				 console.log(arr.arr2); //{1,2,3} {1,2,3}
+			3.超引用...
+				var arr=[1,2,3];
+			 	var arr2=[...arr];
+			 	console.log(arr,arr2); //{1,2,3} {1,2,3}
+-------------------------------------------------------------------
+		循环
+			普通：for   for in 
+
+			ES6:for of 循环		可以循环数组，不能循环Json 真正目的是循环map对象
+
+			遍历（迭代、循环）整个对象，表现类似for in
+
+			var arr=['apple','banana','orange','pear'];
+			for(var i in arr){
+				console.log(i);
+			}	// 0 1 2 3
+
+			for(var i of arr){
+				console.log(i);
+			}	//apple banana orange pear 值
+-------------------------------------------------------------------
+			Map对象：
+				和json相似，也是key-value形式 Map对象是为了和for of循环配合而产生的
+
+			var map = new Map();
+
+			设置：
+			map.set(name.value);
+			获取：
+			map.get(name);
+			删除：
+			map.delete(name);
+			遍历map：
+				不能使用for in,没有效果
+
+		Map和for of联合使用：
+			var map= new Map();
+			map.set('a','apple');
+			map.set('b','banana');
+			map.set('c','orange');
+			map.set('d','pear');
+			for(var name of map){  
+				console.log(name); //a,apple   b,banana......
+			}
+			需要获得 key value 的形式  
+			for(var [key,value] of map){
+				console.log(key,value); 
+			}
+		map.entries（本质，全写）
+			for(var name of map.entries){  
+				console.log(name); //a,apple   b,banana......
+			}
+			只想去获取循环里的key 或者(value)
+			for(var key(val) of map.keys(values)){  
+				console.log(key(val)); //a,b,c,d
+			}
+		for of 也可以循环数组
+				只循环值
+					for(var value of arr){}
+				只循环索引
+					for(var key of arr.keys()){}
+				索引和值都循环：
+					for(var some of arr.entries()){}
+-------------------------------------------------------------------
+		函数：
+			之前：
+				传参：
+				function show(a){
+					return a;
+				}
+				show(12);
+				----------------------
+				function show(){
+					alert(1);
+				}
+				show();
+		箭头函数：=>
+			this问题，this指向了window
+			arguments，不能使用了
+-------------------------------------------------------------------
+		对象:
+			对象语法简洁化
+				单体模式：json
+				var name='add';
+				var age= 101;
+				var preson={
+					name,
+					age,
+					shoeName(){
+						return this.name;
+					},
+					showAge(){
+						return this.age;
+					}
+				}
+		面向对象：
+			class  类
+			构造函数  constructor  生成完实例之后自己执行
+			class Person{
+				constructor(name,age){
+					this.name=name;
+					this.age=age;
+				}
+				showName(){
+					return this.name;
+				}
+				showAge(){
+					return this.age;
+				}
+			}
+			var p1=new Person('aaa',10);
+
+		继承：
+			之前：子类.prototype= new 父类();
+
+			现在：class Worker extends Person{
+				
+			}
+	</script>
+</body>
+</html>
