@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+		Generator:   生成器
+			一个函数，可以遍历
+
+		语法：
+			function show(){  //普通函数
+
+			}
+
+			function* show(){ //generrator函数
+				yield XXXX
+			}
+		形式：
+			1.函数名字前面有*
+			2.函数内部使用yield语句
+
+			function* show(){
+				yield 'one';
+				yield 'two';
+				yield 'three';
+
+				return '111'
+			}
+			var res=show();
+			res.next();  {value:'one',done:false}   done 是否遍历完毕  false是没有
+
+			res.next();  {value:'two',done:false}
+			res.next();  {value:'three',done:false}
+			res.next();  {value:'undefined',done:true}
+		总结：
+			每次返回一个value和done结果
+			value,每次yield后面值
+			done是一个布尔值，代表是否遍历结束
+
+			yield语句本身没有返回值，或者每次返回undefined
+
+			 for...of循环，可以循环generator函数
+
+			 	generator函数放到对象里面：
+			 		var json={
+			 			*show(){
+			 				yield 'xxx'
+			 			}
+			 		}
+</script>
+</html>
